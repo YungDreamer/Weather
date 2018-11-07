@@ -6,19 +6,14 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 
-function getInputValue () {
-    let InputValue=document.getElementById("inputtest");
-    document.getElementById("input_span").innerHTML = InputValue;
-
-}
-
 export default class AlertDialog extends React.Component {
     state = {
         open: false,
-        value: "23534346",
+        value: "",
     };
 
     handleClickOpen = () => {
+        this.setState({ value: document.getElementById("inputtest").value});
         this.setState({ open: true });
     };
 
