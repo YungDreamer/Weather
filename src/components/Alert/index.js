@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -10,36 +9,32 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 export default class AlertDialog extends React.Component {
     state = {
         open: false,
-        value: "",
     };
 
-    handleClickOpen = () => {
-        this.setState({ value: document.getElementById("inputtest").value});
-        this.setState({ open: true });
-    };
-
-    handleClose = () => {
-        this.setState({ open: false });
+    handleClick = () => {
+        this.setState({open: !this.state.open});
     };
 
     render() {
+        const {open} = this.state;
+        const {inputValue} = this.props;
         return (
             <div>
-                <Button onClick={this.handleClickOpen}>Open alert dialog</Button>
+                <Button onClick={this.handleClick}>Open alert dialog</Button>
                 <Dialog
-                    open={this.state.open}
-                    onClose={this.handleClose}
+                    open={open}
+                    onClose={this.handleClick}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
                 >
                     <DialogTitle id="alert-dialog-title">{"Value from input:"}</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-description">
-                            <span id="input_span">{this.state.value}</span>
+                            <span id="input_span">{inputValue}</span>
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleClose} color="primary" autoFocus>
+                        <Button onClick={this.handleClick} color="primary" autoFocus>
                             Agree
                         </Button>
                     </DialogActions>
