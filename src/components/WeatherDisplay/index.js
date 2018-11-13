@@ -22,6 +22,7 @@ import React, { Component } from "react";
       const weatherData = this.state.weatherData;
       if (!weatherData) return <div>Loading</div>;
       if (weatherData.cod==="404") return <div> {weatherData.message} </div>
+      if (weatherData.cod==="400") return <div> {weatherData.message} </div>
       const weather = weatherData.weather[0];
       const iconUrl = "http://openweathermap.org/img/w/" + weather.icon + ".png";
       return (
