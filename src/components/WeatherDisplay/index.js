@@ -17,9 +17,11 @@ import React, { Component } from "react";
       .then(json => {this.setState({ weatherData: json });   //json передаём в функцию, которая устанавливает состояние компонента
       });
     }
+    
     render() {    
       const weatherData = this.state.weatherData;
       if (!weatherData) return <div>Loading</div>;
+      if (weatherData.cod=="404") return <div> {weatherData.message} </div>
       const weather = weatherData.weather[0];
       const iconUrl = "http://openweathermap.org/img/w/" + weather.icon + ".png";
       return (
