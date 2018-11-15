@@ -14,15 +14,22 @@ export default class WeatherDisplay extends Component {
             .then(json => this.setState({weatherData: json}));
     }
 
-    render() {
-        const {weatherData} = this.state;
+    handleError = (weatherData) => {
+        console.log(weatherData)
         if (!weatherData) return <div>Loading</div>;
-
-        //todo ErrorHandler
         if (weatherData.cod === "404") return <div> {weatherData.message} </div>;
         if (weatherData.cod === "400") return <div> {weatherData.message} </div>;
-        const {weather} = weatherData;
-        //todo add function
+    }
+
+    render() {
+        const {weatherData} = this.state;
+        //{this.handleError(weatherData)};
+        if (!weatherData) return <div>Loading</div>;
+        if (weatherData.cod === "404") return <div> {weatherData.message} </div>;
+        if (weatherData.cod === "400") return <div> {weatherData.message} </div>;
+        const {weather, main, wind} = weatherData;
+        const {temp, temp_max, temp_min} = main;
+        const {speed} = wind;
         return (
             <div>
                 {weather.map(({main, icon}) => ({
@@ -32,10 +39,11 @@ export default class WeatherDisplay extends Component {
                     {type} in {weatherData.name}
                     <img src={icon} alt={weatherData.description}/>
                 </h1>))}
-                <p>Current: {weatherData.main.temp}°</p>
-                <p>High: {weatherData.main.temp_max}°</p>
-                <p>Low: {weatherData.main.temp_min}°</p>
-                <p>Wind Speed: {weatherData.wind.speed} mi/hr</p>
+
+                <p>Current: {temp}°C</p>
+                <p>High: {temp_max}°C</p>
+                <p>Low: {temp_min}°C</p>
+                <p>Wind Speed: {speed} mi/hr</p>        
             </div>
         );
     }
