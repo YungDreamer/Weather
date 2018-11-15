@@ -22,8 +22,10 @@ export default class WeatherDisplay extends Component {
 
     render() {
         const {weatherData, error} = this.state;
+        //todo refactor
         if (error) return <div>{error.message}</div>;
-        else if (!weatherData) return <div>Loading</div>; 
+        else if (!weatherData) return <div>Loading</div>;
+        //
         const {weather, main, wind} = weatherData;
         const {temp, temp_max, temp_min} = main;
         const {speed} = wind;
@@ -39,7 +41,7 @@ export default class WeatherDisplay extends Component {
                 <p>Current: {temp}°C</p>
                 <p>High: {temp_max}°C</p>
                 <p>Low: {temp_min}°C</p>
-                <p>Wind Speed: {speed} mi/hr</p>        
+                <p>Wind Speed: {speed} mi/hr</p>
             </div>
         );
     }
